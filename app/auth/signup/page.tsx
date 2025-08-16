@@ -11,38 +11,37 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useAuth } from '@/lib/auth/auth-context';
-import { User } from '@/lib/auth/mock-auth';
-import { Heart, Mail, Lock, Eye, EyeOff, User, Stethoscope, Building2, Users } from 'lucide-react';
+import type { User as UserType } from "@/lib/auth/mock-auth";
+import { Heart, Mail, Lock, Eye, EyeOff, User as UserIcon, Stethoscope, Building2, Users } from "lucide-react";
 
-type UserRole = User['role'];
+type UserRole = UserType['role'];
 
 const roleOptions = [
   {
-    value: 'patient' as UserRole,
+    value: 'patient' as UserType['role'],
     label: 'Patient',
     description: 'Looking for medical treatments abroad',
-    icon: User
+    icon: UserIcon,   // ✅ usa el alias del ícono
   },
   {
-    value: 'provider' as UserRole,
-    label: 'Healthcare Provider',
-    description: 'Doctor, clinic, or medical facility',
-    icon: Stethoscope
+    value: 'provider' as UserType['role'],
+    label: 'Provider',
+    description: 'Clinics or doctors offering services',
+    icon: Stethoscope,
   },
   {
-    value: 'partner' as UserRole,
-    label: 'Partner',
-    description: 'Hotel, transport, or other service provider',
-    icon: Building2
+    value: 'agency' as UserType['role'],
+    label: 'Agency',
+    description: 'Facilitators connecting patients and providers',
+    icon: Building2,
   },
   {
-    value: 'nurse' as UserRole,
-    label: 'Nurse',
-    description: 'Medical professional offering care services',
-    icon: Users
-  }
+    value: 'admin' as UserType['role'],
+    label: 'Admin',
+    description: 'Platform administrator',
+    icon: Users,
+  },
 ];
-
 export default function SignUpPage() {
   const router = useRouter();
   const { signUp } = useAuth();
